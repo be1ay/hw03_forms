@@ -31,7 +31,6 @@ def group_posts(request, slug):
 
 
 def profile(request, username):
-    # Здесь код запроса к модели и создание словаря контекста
     author = get_object_or_404(User, username=username)
     user_posts = author.posts.all()
     paginator = Paginator(user_posts, 10)
@@ -76,7 +75,6 @@ def post_create(request):
 def post_edit(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     author = post.author
-    
     if author != request.user:
         return redirect('posts:post_detail', post_id)
 
