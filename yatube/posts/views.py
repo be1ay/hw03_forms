@@ -8,8 +8,8 @@ from .models import Post, Group, User
 POST_COUNT_ON_PAGE = 10
 
 
-def create_paginator(request, post_list):
-    paginator = Paginator(post_list, POST_COUNT_ON_PAGE)
+def create_paginator(request, post_list, post_count_on_page):
+    paginator = Paginator(post_list, post_count_on_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return page_obj
@@ -17,7 +17,7 @@ def create_paginator(request, post_list):
 
 def index(request):
     post_list = Post.objects.all()
-    page_obj = create_paginator(request, post_list)
+    page_obj = create_paginator(request, post_list, POST_COUNT_ON_PAGE)
     context = {
         'page_obj': page_obj,
     }
@@ -27,7 +27,7 @@ def index(request):
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
     post_list = Post.objects.all()
-    page_obj = create_paginator(request, post_list)
+    page_obj = create_paginator(request, post_list, POST_COUNT_ON_PAGE)
     context = {
         'group': group,
         'page_obj': page_obj,
@@ -38,7 +38,7 @@ def group_posts(request, slug):
 def profile(request, username):
     author = get_object_or_404(User, username=username)
     user_posts = author.posts.all()
-    page_obj = create_paginator(request, user_posts)
+    page_obj = create_paginator(request, user_posts, POST_COUNT_ON_PAGE)
     context = {
         'author': author,
         'page_obj': page_obj,

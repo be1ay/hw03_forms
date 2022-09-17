@@ -9,14 +9,14 @@
           {% block card-header %}baseForm{% endblock %}
         </div>
         <div class="card-body">
-          {% include 'posts/includes/check_err.html' %} 
+          {% include 'includes/check_err.html' %} 
           <form method="post"
             {% if action_url %}
               action="{% url action_url %}"
             {% endif %}
           >
           {% csrf_token %}
-          {% include 'posts/includes/form_fields.html' %}
+          {% include 'includes/form_fields.html' %}
           <div class="col-md-6 offset-md-4">
             <button type="submit" class="btn btn-primary">
                 {% block btn-name %}

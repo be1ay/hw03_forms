@@ -13,10 +13,14 @@
           {% endif %}       
           </div>
           <div class="card-body">        
-            {% include 'posts/includes/check_err.html' %} 
-                <form method="post" action="{% url 'posts:post_create' %}">
+            {% include 'includes/check_err.html' %} 
+                <form method="post" 
+                {% if action_url %}
+                  action="{% url action_url %}"
+                {% endif %}
+                >
                 {% csrf_token %}
-                {% include 'posts/includes/form_fields.html' %} 
+                {% include 'includes/form_fields.html' %} 
                   <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">
                      {% if is_edit %}
