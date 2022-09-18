@@ -15,8 +15,10 @@
           <div class="card-body">        
             {% include 'includes/check_err.html' %} 
                 <form method="post" 
-                {% if action_url %}
-                  action="{% url action_url %}"
+                {% if is_edit %}
+                  action="{% url 'posts:post_edit' post_id%}"
+                {% else %}
+                  action="{% url 'posts:post_create' %}"
                 {% endif %}
                 >
                 {% csrf_token %}
